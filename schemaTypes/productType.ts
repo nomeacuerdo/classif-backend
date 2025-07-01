@@ -64,6 +64,12 @@ export const productType = defineType({
         layout: 'switch',
       },
     }),
+    defineField({
+      name: 'publishedAt',
+      type: 'datetime',
+      initialValue: () => new Date().toISOString(),
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {
