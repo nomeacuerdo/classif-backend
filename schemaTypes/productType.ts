@@ -8,7 +8,7 @@ export const productType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'name',
+      name: 'title',
       type: 'string',
       title: 'Product name',
       validation: (rule) => rule
@@ -73,14 +73,14 @@ export const productType = defineType({
   ],
   preview: {
     select: {
-      title: "name",
-      subtitle: "price",
+      title: "title",
+      price: "price",
       images: "images",
       negociable: "negociable",
     },
-    prepare({title, subtitle, images, negociable}) {
+    prepare({title, price, images, negociable}) {
       const titleFormatted = title || 'No Name :|';
-      const priceFormatted = subtitle.toLocaleString('en-US', {
+      const priceFormatted = price.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 0,
@@ -91,7 +91,7 @@ export const productType = defineType({
 
       return {
         title: titleFormatted,
-        subtitle: finalPrice,
+        price: finalPrice,
         media: images && images.length > 0 ? images[0] : ImageIcon,
         negociable,
       }
