@@ -25,11 +25,11 @@ export const productType = defineType({
       hidden: ({document}) => !document?.name,
     }),
     defineField({
-      type: "image",
-      name: "image",
-      title: "Product image",
+      title: "Product images",
+      name: "images",
+      type: "array",
+      of: [{ type: "image", icon: ImageIcon }],
       description: "pics or it didn't happen",
-      icon: ImageIcon,
     }),
     defineField({
       name: 'description',
@@ -69,10 +69,10 @@ export const productType = defineType({
     select: {
       title: "name",
       subtitle: "price",
-      image: "image",
+      images: "images",
       negociable: "negociable",
     },
-    prepare({title, subtitle, image, negociable}) {
+    prepare({title, subtitle, images, negociable}) {
       const titleFormatted = title || 'No Name :|';
       const priceFormatted = subtitle.toLocaleString('en-US', {
         style: 'currency',
@@ -86,7 +86,7 @@ export const productType = defineType({
       return {
         title: titleFormatted,
         subtitle: finalPrice,
-        media: image || ImageIcon,
+        media: images && images.length > 0 ? images[0] : ImageIcon,
         negociable,
       }
     },
