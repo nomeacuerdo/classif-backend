@@ -27,7 +27,10 @@ export const pageType = defineType({
     defineField({
       name: 'content',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [
+        { type: 'block' },
+        { type: 'image', icon: ImageIcon },
+      ],
     }),
     defineField({
       name: 'publishedAt',
